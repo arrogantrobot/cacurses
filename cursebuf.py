@@ -3,7 +3,6 @@
 class cursebuf:
     def __init__(self, lines):
         self.lines = []
-        print "len(lines): {0}".format(lines)
         for n in range(lines):
             self.lines.append("")
 
