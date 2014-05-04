@@ -17,6 +17,9 @@ class ca:
 
   def set_rule(self, rule):
     self.rule = rule
+
+  def get_rule(self):
+    return self.rule
   
   def increment_rule(self):
     self.rule = self.rule + 1 % 255

@@ -4,6 +4,7 @@ import curses
 import curses.wrapper
 from cursebuf import cursebuf
 from ca import ca
+from infobox import infobox
 import time
 
 class ca_app:
@@ -18,6 +19,7 @@ class ca_app:
         (self.max_y,self.max_x) = self.stdscr.getmaxyx()
         self.cb = cursebuf(self.max_y-1)
         self.ca = ca(self.max_x)
+        self.info_win = infobox(30, 4, 0, 0)
         curses.start_color()
         curses.noecho()
         curses.init_pair(1, curses.COLOR_RED, curses.COLOR_WHITE)
@@ -25,12 +27,7 @@ class ca_app:
     def stop(self):
         curses.nocbreak(); self.stdscr.keypad(0); curses.echo()
         curses.endwin()
-
-    def update_old(self):
-        for y in range(1, self.max_y-1):
-            brush = self.get_brush()
-            for x in range(1, self.max_x-1):
-                self.stdscr.addstr(int(y),int(x), brush)
+        exit()
 
     def update(self):
         s = "".join( map( self.brush, self.ca.get_next() ) )
@@ -59,13 +56,16 @@ class ca_app:
             self.wait_time -= self.wait_time * 0.10
         elif c == curses.KEY_DOWN:
             self.wait_time += self.wait_time * 0.10
+        elif c == 27 or c == ord('q'):
+            self.stop()
         if not self.pause:
             self.update()
             self.stdscr.refresh()
+            self.info_win.update(self.ca.get_rule(), 1 / self.wait_time)
 
     def main(self):
         self.start()
-        self.brush_set = { 0: " ", 1: "X"}
+        self.brush_set = { 0: " ", 1: "\xdb"}
         try:
             self.stdscr.nodelay(1)
             self.pause = False
