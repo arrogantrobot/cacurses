@@ -21,8 +21,10 @@ class ca_app:
         self.info_win = infobox(30, 4, 0, 0)
         curses.start_color()
         curses.noecho()
-        curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_WHITE)
-        curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_BLACK)
+        #curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_WHITE)
+        #curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_BLACK)
+        curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLUE)
+        curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_GREEN)
 
     def stop(self):
         curses.nocbreak(); self.stdscr.keypad(0); curses.echo()
