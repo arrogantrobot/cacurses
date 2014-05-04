@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import curses
-import curses.wrapper
 from cursebuf import cursebuf
 from ca import ca
 from infobox import infobox
@@ -22,7 +21,8 @@ class ca_app:
         self.info_win = infobox(30, 4, 0, 0)
         curses.start_color()
         curses.noecho()
-        curses.init_pair(1, curses.COLOR_RED, curses.COLOR_WHITE)
+        curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_WHITE)
+        curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_BLACK)
 
     def stop(self):
         curses.nocbreak(); self.stdscr.keypad(0); curses.echo()
@@ -38,7 +38,8 @@ class ca_app:
         for (y, line) in enumerate(self.cb.get_buf()):
             v = buffer(line)
             for n in range(len(line)):
-                self.stdscr.addch(int(y),int(n),v[n])
+                attr = 2 if v[n] == " " else 1
+                self.stdscr.addstr(int(y),int(n),v[n], curses.color_pair(attr))
         self.stdscr.move(0,0)
     def brush(self, v):
         return self.brush_set[v]
@@ -65,7 +66,8 @@ class ca_app:
 
     def main(self):
         self.start()
-        self.brush_set = { 0: " ", 1: "\xdb"}
+        b = "X"
+        self.brush_set = { 0: " ", 1: b }
         try:
             self.stdscr.nodelay(1)
             self.pause = False
