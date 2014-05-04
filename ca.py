@@ -22,10 +22,10 @@ class ca:
     return self.rule
   
   def increment_rule(self):
-    self.rule = self.rule + 1 % 255
+    self.rule = (self.rule + 1) % 255
 
   def decrement_rule(self):
-    self.rule = self.rule - 1 % 255
+    self.rule = (self.rule - 1) % 255
 
   def iterate(self):
     nxt = []

@@ -12,6 +12,7 @@ class infobox:
         self.y = y
 
     def update(self, rule, speed):
+        self.infowin.erase()
         self.infowin.border()
         self.infowin.addstr(1,1, self.get_rule(rule))
         self.infowin.addstr(2,1, self.get_speed(speed))
