@@ -1,6 +1,12 @@
 CACurses: Cellular Automata in Curses
 ----------
 
+to start
+
+```
+./cacurses.py
+```
+
 * +1 to rule "right"
 * -1 to rule "left"
 * speed up 10% "up"
