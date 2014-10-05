@@ -15,7 +15,7 @@ rule_max = 50
 class ca_app:
     def __init__(self, filename): 
         self.wait_time = 0.05
-        self.rules = [30, 57, 18, 90, 129, 130, 131, 132, 133]
+        self.rules = [30, 57, 18, 89, 90, 129, 130, 131, 132, 133]
         self.nozzle = TextNozzle(filename)
         self.main()
 
