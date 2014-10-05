@@ -31,7 +31,11 @@ class ca:
     nxt = []
     for n in range(len(self.cells)):
       nxt.append(self.get_cell(n))
-    self.cells = nxt
+    s = sum(nxt)
+    if s == 0 or s == len(nxt):
+      self.reset
+    else:
+      self.cells = nxt
 
   def get_cell(self, n):
     index = 0
